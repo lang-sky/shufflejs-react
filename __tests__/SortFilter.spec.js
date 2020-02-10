@@ -49,7 +49,7 @@ test('Instantiate SortFilter component via mount', () => {
   expect(wrapper.find(Core).instance().element.current).toMatchSnapshot();
 })
 
-function Elements({ itemSelector }) {
+function Elements({ itemSelector, records }) {
   return records.map((record) => <Element key={record.id} record={record} itemSelector={itemSelector} />);
 }
 

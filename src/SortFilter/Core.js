@@ -17,24 +17,10 @@ class Core extends Component {
     super(props);
     this.state = {
       // taxonomies: {},
-      taxonomiesBodyTypeNames: []
+      taxonomiesBodyTypeNames: Object.keys(this.props.taxonomies['Body Types'])
     };
     this.element = React.createRef();
     this.sizer = React.createRef();
-  }
-
-  UNSAFE_componentWillMount() {
-    /**
-     * Kick off the network request and update the state once it returns.
-     */
-    const { taxonomies } = this.props;
-    this._loadProps()
-      .then(() => {
-        this.setState({
-          // taxonomies,
-          taxonomiesBodyTypeNames: Object.keys(taxonomies['Body Types'])
-        });
-      });
   }
 
   componentDidMount() {
@@ -49,6 +35,7 @@ class Core extends Component {
       sizer: this.sizer.current,
       // initialSort: options
     });
+    putSearchParams(this.props.defaultSort);
     this.sortFromUrlSearch();
   }
 
@@ -142,18 +129,6 @@ class Core extends Component {
    */
   toggleSlide = () => {
     this.slider.classList.toggle('slider-closed');
-  }
-
-  /**
-   * Set delay
-   * @return {Promise<Object[]>} A promise which resolves with an array of objects.
-   */
-  _loadProps() {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(this.props);
-      }, 500);
-    });
   }
 
   render() {
